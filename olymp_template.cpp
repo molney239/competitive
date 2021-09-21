@@ -41,7 +41,7 @@ typedef __uint128_t            uint128;
 // Functions
 
 template<typename T>
-void cout_vetcor(std::vector<T> vector, bool new_line=true) {
+void cout_vector(std::vector<T> vector, bool new_line=true) {
     for (size_t i = 0; i < vector.size(); i++) {
         std::cout << vector[i] << " ";
     }
