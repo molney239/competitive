@@ -1,97 +1,67 @@
-
-// Params
-
-// Set it to false if your program need interactive I/O
-#define USE_QUICK_IO true
-
-// Includes
-
 #include <iostream>
 #include <vector>
-#include <cstdint>
+#include <string>
 #include <algorithm>
-#include <ctime>
+#include <cmath>
+#include <map>
+#include <set>
 
 using namespace std;
 
-// Data types
+const bool USE_QUICK_IO = true;
 
-#define  INF16   32767
-#define  UINF16  65535
-#define  INF32   2147483647
-#define  UINF32  4294967295
-#define  INF64   9223372036854775807
-#define  UINF64  18446744073709551615
-#define  INF128  170141183460469231731687303715884105727
-#define  UINF128 340282366920938463463374607431768211455
+#define rep(i, n) for (int i = 0; i < (n); i++)
+#define rep1(i, n) for (int i = 1; i < (n); i++)
+#define rep1n(i, n) for (int i = 1; i <= (n); i++)
+#define repr(i, n) for (int i = (n) - 1; i >= 0; i--)
+#define pb push_back
+#define eb emplace_back
+#define all(v) (v).begin(), (v).end()
+#define rall(v) (v).rbegin(), (v).rend()
+#define size(v) (int)((v).size())
+#define each(x, v) for (auto &(x) : (v))
+#define vec vector
+#define f0r(a, b) for (int i = (a); i < (b); i++)
+#define cout_v(v) each(x, v) { cout << x << " "; }
 
-typedef signed short int       int16;
-typedef unsigned short int     uint16;
-typedef signed int             int32;
-typedef unsigned int           uint32;
-typedef signed long long int   int64;
-typedef unsigned long long int uint64;
-typedef __int128_t             int128;
-typedef __uint128_t            uint128;
+using si = short;
+using ll = long long;
+using uint = unsigned int;
+using usi = unsigned short;
+using ull = unsigned long long;
+using ld = long double;
+using str = string;
+using pi = pair<int, int>;
+using pl = pair<ll, ll>;
 
-typedef signed short int       sint;
-typedef unsigned short int     usi;
-typedef unsigned int           uint;
-typedef signed long long int   ll;
-typedef unsigned long long int ull;
-
-typedef long double            ld;
-
-// Functions
-
-template<typename T>
-void print_vector(std::vector<T> vector, bool new_line=true) {
-    for (size_t i = 0; i < vector.size(); i++) {
-        std::cout << vector[i] << " ";
-    }
-    if (new_line) std::cout << "\n";
-}
-
-
-
-void enable_quick_io() {
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    std::cout.tie(nullptr);
-}
-
-template<typename T, typename... Args>
-uint time(T (*func)(Args...), Args... args) {
-    uint start_time = clock();
-    func(std::forward<Args>(args)...);
-    return clock() - start_time;
-}
-
-// Algorithms
-
-template <typename T>
-std::vector<T> sort_vector(std::vector<T> &v, bool descending = false) {
-    if (descending) v = sort_vector(v, [] (T element1, T element2) { return element1 > element2; });
-    else v = sort_vector(v, [] (T element1, T element2) { return element1 < element2; });
-    return v;
-}
-
-template <typename T>
-std::vector<T> sort_vector(std::vector<T> &v, bool (*comp) (T, T)) {
-    v = std::sort(v.begin(), v.end(), comp);
-    return v;
-}
-
-// Main
+using vi = vector<int>;
+using vl = vector<ll>;
+using vpi = vector<pair<int, int>>;
+using vvi = vector<vi>;
 
 void solve() {
 
+    vi v {1, 4, 3, 2, 5};
+    sort(all(v));
+    cout_v(v);
+
 }
 
-// Entry point
-
 int main() {
-    if (USE_QUICK_IO) enable_quick_io();
+
+    if (USE_QUICK_IO) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(0);
+    }
+
+    // cout << setprecision(6) << fixed;
+
+//    int t = 1;
+//    cin >> t;
+//    rep(i, t) {
+//        solve();
+//    }
+
     solve();
-    return 0;
+
 }
