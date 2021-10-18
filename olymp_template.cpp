@@ -5,7 +5,7 @@
 #include <cmath>
 #include <map>
 #include <set>
-
+#include <iomanip>
 using namespace std;
 
 const bool USE_QUICK_IO = true;
@@ -41,9 +41,7 @@ using vvi = vector<vi>;
 
 void solve() {
 
-    vi v {1, 4, 3, 2, 5};
-    sort(all(v));
-    cout_v(v);
+
 
 }
 
@@ -53,14 +51,7 @@ int main() {
         ios_base::sync_with_stdio(false);
         cin.tie(0);
     }
-
-    // cout << setprecision(6) << fixed;
-
-//    int t = 1;
-//    cin >> t;
-//    rep(i, t) {
-//        solve();
-//    }
+    cout << setprecision(6) << fixed;
 
     solve();
 
