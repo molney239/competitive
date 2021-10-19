@@ -6,6 +6,7 @@
 #include <map>
 #include <set>
 #include <iomanip>
+
 using namespace std;
 
 const bool USE_QUICK_IO = true;
@@ -18,11 +19,12 @@ const bool USE_QUICK_IO = true;
 #define eb emplace_back
 #define all(v) (v).begin(), (v).end()
 #define rall(v) (v).rbegin(), (v).rend()
-#define size(v) (int)((v).size())
+#define sze(v) (int)((v).size())
 #define each(x, v) for (auto &(x) : (v))
 #define vec vector
 #define f0r(a, b) for (int i = (a); i < (b); i++)
 #define cout_v(v) each(x, v) { cout << x << " "; }
+#define nl "\n"
 
 using si = short;
 using ll = long long;
@@ -42,11 +44,9 @@ using vvi = vector<vi>;
 void solve() {
 
 
-
 }
 
 int main() {
-
     if (USE_QUICK_IO) {
         ios_base::sync_with_stdio(false);
         cin.tie(0);
