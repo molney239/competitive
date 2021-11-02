@@ -1,9 +1,11 @@
 # olymp-template
-Program template for programming olympiads.
+C++ code template for olympiad programming.
 
 Include useful things in C++, such as:
- - Shrto data types names
+ - Most used libraries
  - A lot of macros
- - Tools to speed up standard output times
+ - I/O overloading for vectors
+ - Short typenames
+ - Speed up for I/O
 
-You can use it to simplify writing programs for solving Olympiad problems.
+You can use this template to speed up and simplify solving C ++ programming olympiad problems.
