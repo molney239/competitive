@@ -13,52 +13,69 @@ const bool USE_QUICK_IO = true;
 const bool USE_T = false;
 const unsigned PRECISION = 6;
 
-#define rep(i, n) for (int (i) = 0; (i) < (n); (i)++)
-#define repn(i, n) for (int (i) = 0; (i) <= (n); (i)++)
-#define rep1(i, n) for (int (i) = 1; (i) < (n); (i)++)
-#define rep1n(i, n) for (int (i) = 1; (i) <= (n); (i)++)
-#define repr(i, n) for (int (i) = (n) - 1; (i) >= 0; (i)--)
+#define rep(i, n) for (size_t (i) = 0; (i) < (n); (i)++)
+#define repn(i, n) for (size_t (i) = 0; (i) <= (n); (i)++)
+#define rep1(i, n) for (size_t (i) = 1; (i) < (n); (i)++)
+#define rep1n(i, n) for (size_t (i) = 1; (i) <= (n); (i)++)
+#define repr(i, n) for (size_t (i) = (n) - 1; (i) >= 0; (i)--)
 #define pb push_back
 #define all(v) (v).begin(), (v).end()
 #define rall(v) (v).rbegin(), (v).rend()
 #define sze(v) (v).size()
-#define each(x, v) for (auto &(x) : (v))
+#define each(x, v) for (auto& (x) : (v))
 #define vec vector
-#define f0r(i, a, b) for (int (i) = (a); (i) <= (b); (i)++)
+#define f0r(i, a, b) for (size_t (i) = (a); (i) < (b); (i)++)
+#define f0rn(i, a, b) for (size_t (i) = (a); (i) <= (b); (i)++)
 #define nl "\n"
+#define mp(a, b) make_pair(a, b)
+#define itp(v) make_pair((v).begin(), (v).end())
+#define nw(n, type) type (n); cin >> (n)
+#define nwp(n, type, args...) type(n)(args); cin >> n
+
+#define si short
+#define ll long long
+#define uint unsigned int
+#define usi unsigned short
+#define ull unsigned long long
+#define ld long double
+#define str string
+#define pi pair<int, int>
+#define pl pair<ll, ll>
+
+#define vi vector<int>
+#define vl vector<ll>
+#define vb vector<bool>
+#define vpi vector<pair<int, int>>
+#define vvi vector<vi>
 
 template<typename T1, typename T2>
-std::ostream& operator<<(std::ostream &os, pair<T1, T2>& p) { return os << p.first << " " << p.second; }
+ostream& operator<<(ostream &os, pair<T1, T2>& p) { return os << p.first << " " << p.second; }
 template<typename T1, typename T2>
-std::istream& operator >> (std::istream& in, pair<T1, T2>& p) { in >> p.first >> p.second; return in; }
+istream& operator>>(istream& in, pair<T1, T2>& p) { in >> p.first >> p.second; return in; }
 template<typename T>
-std::ostream& operator<<(std::ostream &os, vector<T>& v) { for(T x : v) os << x << " "; return os; }
+ostream& operator<<(ostream &os, vector<T>& v) { each(x, v) os << x << " "; return os; }
 template<typename T>
-std::istream& operator >> (std::istream& in, vector<T>& v) { for(T& x : v) in >> x; return in; }
+istream& operator>>(istream& in, vector<T>& v) { each(x, v) in >> x; return in; }
+template<typename random_it>
+ostream& operator<<(ostream &os, pair<random_it, random_it> it) {
+    while(it.first != it.second) os << *(it.first++) << " ";
+    return os;
+}
+template<typename random_it>
+istream& operator>>(istream& in, pair<random_it, random_it> it) {
+    while(it.first != it.second) in >> it.first++;
+    return in;
+}
 template<typename T>
-bool even(T n) { return !(n % 2); }
+bool even(const T& n) { return !(n % 2); }
 
-using si = short;
-using ll = long long;
-using uint = unsigned int;
-using usi = unsigned short;
-using ull = unsigned long long;
-using ld = long double;
-using str = string;
-using pi = pair<int, int>;
-using pl = pair<ll, ll>;
-
-using vi = vector<int>;
-using vl = vector<ll>;
-using vb = vector<bool>;
-using vpi = vector<pair<int, int>>;
-using vvi = vector<vi>;
 
 void solve() {
     
     
     
 }
+
 
 int main() {
 
