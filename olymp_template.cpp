@@ -4,19 +4,22 @@
 #include <stack>
 #include <queue>
 #include <algorithm>
+#include <cmath>
+#include <map>
+#include <set>
 using namespace std;
 
-#define rep(i, n) for (size_t (i) = 0; (i) < (n); (i)++)
-#define repn(i, n) for (size_t (i) = 0; (i) <= (n); (i)++)
-#define rep1(i, n) for (size_t (i) = 1; (i) < (n); (i)++)
-#define rep1n(i, n) for (size_t (i) = 1; (i) <= (n); (i)++)
-#define repr(i, n) for (size_t (i) = (n) - 1; (i) >= 0; (i)--)
+#define rep(i, n) for (long long (i) = 0; (i) < (n); (i)++)
+#define repn(i, n) for (long long (i) = 0; (i) <= (n); (i)++)
+#define rep1(i, n) for (long long (i) = 1; (i) < (n); (i)++)
+#define rep1n(i, n) for (long long (i) = 1; (i) <= (n); (i)++)
+#define repr(i, n) for (long long (i) = (n) - 1; (i) >= 0; (i)--)
 #define all(v) (v).begin(), (v).end()
 #define rall(v) (v).rbegin(), (v).rend()
 #define each(x, v) for (auto& (x) : (v))
 #define vec vector
-#define f0r(i, a, b) for (size_t (i) = (a); (i) < (b); (i)++)
-#define f0rn(i, a, b) for (size_t (i) = (a); (i) <= (b); (i)++)
+#define f0r(i, a, b) for (long long (i) = (a); (i) < (b); (i)++)
+#define f0rn(i, a, b) for (long long (i) = (a); (i) <= (b); (i)++)
 #define nl "\n"
 
 #define si short
