@@ -1,4 +1,4 @@
-# C++ code templates for Competitive programming
+# C++ code templates for competitive programming
 This repository contains C++ program file templates for participation in competitive programming contests. It is useful to save time on preparation and writing code.
 
 Templates include code on C++, that provide useful things, such as:
