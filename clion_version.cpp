@@ -1,5 +1,3 @@
-#[[#pragma]]# GCC optimize("O3,unroll-loops")
-#[[#pragma]]# GCC diagnostic warning "-Wunused"
 #[[#include]]# <bits/stdc++.h>
 using namespace std;
 
@@ -10,19 +8,21 @@ using namespace std;
 #[[#define]]# rall(v) (v).rbegin(), (v).rend()
 #[[#define]]# nl "\n"
 
-typedef long long ll;
+#[[#define]]# int32 int32_t
+#[[#define]]# int long long
 typedef string str;
 typedef pair<int, int> pi;
-typedef vector<int> vi ;
-typedef vector<ll> vl;
+typedef vector<int> vi;
 typedef vector<bool> vb;
 typedef vector<pair<int, int>> vpi;
-typedef vector<vi> vvi;
+typedef vector<vector<int>> vvi;
 
-template<typename T> ostream& operator<<(ostream &os, vector<T>& v) { for(auto &x : v) os << x << " "; return os; }
-template<typename T> istream& operator>>(istream &in, vector<T>& v) { for(auto &x : v) in >> x; return in; }
+template<typename T> istream& operator>>(istream &in, vector<T>& v) { for (auto &x : v) in >> x; return in; }
+template<typename T> ostream& operator<<(ostream &os, vector<T>& v) { for (auto &x : v) os << string(x) << " "; return os; }
+template<typename T> istream& operator>>(istream &in, pair<T, T>& p) { in >> p.first >> p.second; return in; }
+template<typename T> ostream& operator<<(ostream &os, pair<T, T>& p) { os << p.first << " " << p.second; return os; }
 
-#[[#define]]# USE_QUICK_IO
+//#[[#define]]# USE_QUICK_IO
 //#[[#define]]# USE_T
 //#[[#define]]# USE_FILESTREAM
 
@@ -34,7 +34,7 @@ void solve() {
 }
 
 
-int main() {
+int32_t main() {
     #[[#ifdef]]# USE_FILESTREAM
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
@@ -45,9 +45,9 @@ int main() {
         cout.tie(nullptr);
     #[[#endif]]#
     cout << setprecision(6) << fixed;
-    ll t = 1;
+    int32_t t = 1;
     #[[#ifdef]]# USE_T
         cin >> t;
     #[[#endif]]#
-    rep(i, t) solve();
+    for (int32_t i = 0; i < t; i++) solve();
 }
