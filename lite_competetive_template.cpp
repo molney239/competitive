@@ -13,22 +13,22 @@ typedef vector<vector<int>> vvi;
 
 
 void solve(long long test_case) {
-
-
-
+    
+    
+    
 }
 
 
 int main() {
-//    freopen("input.txt", "r", stdin);
-//    freopen("output.txt", "w", stdout);
+//    std::freopen("input.txt", "r", stdin);
+//    std::freopen("output.txt", "w", stdout);
 
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(nullptr);
-//    cout.tie(nullptr);
-    cout << setprecision(6) << fixed;
+//    std::ios_base::sync_with_stdio(false);
+//    std::cin.tie(nullptr);
+//    std::cout.tie(nullptr);
+    std::cout << std::setprecision(6) << std::fixed;
 
     long long t = 1;
-    //cin >> t;
+//    std::cin >> t;
     for (long long i = 0; i < t; i++) solve(i + 1);
 }
