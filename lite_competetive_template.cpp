@@ -1,25 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define rep(i, n) for (int (i) = 0; (i)<(n); (i)++)
+#define rep(i, n) for (long long (i) = 0; (i) < (n); (i)++)
 #define nl "\n"
 
-#define int32 int32_t
-#define int long long
+typedef long long ll;
+typedef string str;
 typedef pair<int, int> pi;
 typedef vector<int> vi;
 typedef vector<pair<int, int>> vpi;
 typedef vector<vector<int>> vvi;
 
 
-void solve() {
+void solve(long long test_case) {
 
 
 
 }
 
 
-int32_t main() {
+int main() {
 //    freopen("input.txt", "r", stdin);
 //    freopen("output.txt", "w", stdout);
 
@@ -28,7 +28,7 @@ int32_t main() {
 //    cout.tie(nullptr);
     cout << setprecision(6) << fixed;
 
-    int32_t t = 1;
+    long long t = 1;
     //cin >> t;
-    for (int32_t i = 0; i < t; i++) solve();
+    for (long long i = 0; i < t; i++) solve(i + 1);
 }
