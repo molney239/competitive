@@ -8,33 +8,34 @@ using namespace std;
 #[[#define]]# rall(v) (v).rbegin(), (v).rend()
 #[[#define]]# nl "\n"
 
-#[[#define]]# int32 int32_t
-#[[#define]]# int long long
+typedef long long ll;
 typedef string str;
 typedef pair<int, int> pi;
+typedef pair<int, int> pl;
 typedef vector<int> vi;
+typedef vector<int> vl;
 typedef vector<bool> vb;
 typedef vector<pair<int, int>> vpi;
 typedef vector<vector<int>> vvi;
 
 template<typename T> istream& operator>>(istream &in, vector<T>& v) { for (auto &x : v) in >> x; return in; }
-template<typename T> ostream& operator<<(ostream &os, vector<T>& v) { for (auto &x : v) os << string(x) << " "; return os; }
-template<typename T> istream& operator>>(istream &in, pair<T, T>& p) { in >> p.first >> p.second; return in; }
-template<typename T> ostream& operator<<(ostream &os, pair<T, T>& p) { os << p.first << " " << p.second; return os; }
+template<typename T> ostream& operator<<(ostream &os, vector<T>& v) { for (auto &x : v) os << x << " "; return os; }
+template<typename T1, typename T2> istream& operator>>(istream &in, pair<T1, T2>& p) { in >> p.first >> p.second; return in; }
+template<typename T1, typename T2> ostream& operator<<(ostream &os, pair<T1, T2>& p) { os << p.first << " " << p.second; return os; }
 
 //#[[#define]]# USE_QUICK_IO
 //#[[#define]]# USE_T
 //#[[#define]]# USE_FILESTREAM
 
 
-void solve() {
+void solve(int test_case) {
     
     
     
 }
 
 
-int32_t main() {
+int main() {
     #[[#ifdef]]# USE_FILESTREAM
         freopen("input.txt", "r", stdin);
         freopen("output.txt", "w", stdout);
@@ -45,9 +46,9 @@ int32_t main() {
         cout.tie(nullptr);
     #[[#endif]]#
     cout << setprecision(6) << fixed;
-    int32_t t = 1;
+    long long t = 1;
     #[[#ifdef]]# USE_T
         cin >> t;
     #[[#endif]]#
-    for (int32_t i = 0; i < t; i++) solve();
+    for (long long i = 0; i < t; i++) solve(i + 1);
 }
