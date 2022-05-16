@@ -23,7 +23,7 @@ template<typename T> ostream& operator<<(ostream& os, vector<T>& v) { for (auto&
 template<typename T1, typename T2> istream& operator>>(istream& in, pair<T1, T2>& p) { in >> p.first >> p.second; return in; }
 template<typename T1, typename T2> ostream& operator<<(ostream& os, pair<T1, T2>& p) { os << p.first << " " << p.second; return os; }
 
-//#define USE_QUICK_IO
+#define USE_QUICK_IO
 //#define USE_T
 //#define USE_FILESTREAM
 
@@ -40,10 +40,12 @@ int main() {
         std::freopen("input.txt", "r", stdin);
         std::freopen("output.txt", "w", stdout);
     #endif
-    #ifdef USE_QUICK_IO
-        std::ios_base::sync_with_stdio(false);
-        std::cin.tie(nullptr);
-        std::cout.tie(nullptr);
+    #ifndef MOLNEY_LOCAL
+        #ifdef USE_QUICK_IO
+            std::ios_base::sync_with_stdio(false);
+            std::cin.tie(nullptr);
+            std::cout.tie(nullptr);
+        #endif
     #endif
     std::cout << std::setprecision(6) << std::fixed;
     long long t = 1;
