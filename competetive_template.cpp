@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define rep(i, n) for (long long (i) = 0; (i) < (n); (i)++)
-#define rep1(i, n) for (long long (i) = 1; (i) < (n); (i)++)
-#define repr(i, n) for (long long (i) = (n) - 1; (i) >= 0; (i)--)
+#define rep(i, n) for (long long (i) = 0; (i) < (long long)(n); (i)++)
+#define rep1(i, n) for (long long (i) = 1; (i) < (long long)(n); (i)++)
+#define repr(i, n) for (long long (i) = (long long)(n) - 1; (i) >= 0; (i)--)
 #define all(v) (v).begin(), (v).end()
 #define rall(v) (v).rbegin(), (v).rend()
 #define nl "\n"
@@ -23,9 +23,12 @@ template<typename T> ostream& operator<<(ostream& os, vector<T>& v) { for (auto&
 template<typename T1, typename T2> istream& operator>>(istream& in, pair<T1, T2>& p) { in >> p.first >> p.second; return in; }
 template<typename T1, typename T2> ostream& operator<<(ostream& os, pair<T1, T2>& p) { os << p.first << " " << p.second; return os; }
 
+mt19937 rnd(chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch()).count());
+
 #define USE_QUICK_IO
 //#define USE_T
 //#define USE_FILESTREAM
+//#define _GLIBCXX_DEBUG
 
 
 void solve(long long test_case) {
@@ -44,7 +47,6 @@ int main() {
         #ifdef USE_QUICK_IO
             std::ios_base::sync_with_stdio(false);
             std::cin.tie(nullptr);
-            std::cout.tie(nullptr);
         #endif
     #endif
     std::cout << std::setprecision(6) << std::fixed;
