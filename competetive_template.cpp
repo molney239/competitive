@@ -1,6 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//#include <ext/pb_ds/assoc_container.hpp>
+//#include <ext/pb_ds/tree_policy.hpp>
+//#include <ext/rope>
+//using namespace __gnu_pbds;
+//using namespace __gnu_cxx;
+//typedef tree<int, null_type, less<>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
+
 #define rep(i, n) for (long long (i) = 0; (i) < (long long)(n); (i)++)
 #define rep1(i, n) for (long long (i) = 1; (i) < (long long)(n); (i)++)
 #define repr(i, n) for (long long (i) = (long long)(n) - 1; (i) >= 0; (i)--)
@@ -28,8 +35,6 @@ mt19937 rnd(chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::no
 #define USE_QUICK_IO
 //#define USE_T
 //#define USE_FILESTREAM
-//#define _GLIBCXX_DEBUG
-
 
 void solve(long long test_case) {
     
