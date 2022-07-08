@@ -1,25 +1,39 @@
 # C++ code templates for competitive programming
 This repository contains C++ program file templates for participation in competitive programming contests. It is useful to save time on preparation and writing code.
 
+# Description
 Templates include code on C++, that provide useful things, such as:
+ - Pragmas and debug helpers
+ ```cpp
+ #pragma GCC optimize("O3,unroll-loops")
+//#define _GLIBCXX_DEBUG
+```
  - Libraries
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
 ```
+ - STL treap and ordered_set structures
+ ```cpp
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+#include <ext/rope>
+using namespace __gnu_pbds;
+using namespace __gnu_cxx;
+typedef tree<int, null_type, less<>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
+```
  - Useful macros
 ```cpp
-#define rep(i, n) for (long long (i) = 0; (i) < (n); (i)++)
-#define rep1(i, n) for (long long (i) = 1; (i) < (n); (i)++)
-#define repr(i, n) for (long long (i) = (n) - 1; (i) >= 0; (i)--)
+#define rep(i, n) for (long long (i) = 0; (i) < (long long)(n); (i)++)
+#define rep1(i, n) for (long long (i) = 1; (i) < (long long)(n); (i)++)
+#define repr(i, n) for (long long (i) = (long long)(n) - 1; (i) >= 0; (i)--)
 #define all(v) (v).begin(), (v).end()
 #define rall(v) (v).rbegin(), (v).rend()
-#define nl "\n"
+#define nl '\n'
 ```
 - Short type names
 ```cpp
 typedef long long ll;
-typedef string str;
 typedef pair<int, int> pi;
 typedef pair<long long, long long> pl;
 typedef vector<int> vi;
@@ -30,62 +44,91 @@ typedef vector<vector<int>> vvi;
 ```
  - I/O overload for vectors and pairs
 ```cpp
-template<typename T>
-istream& operator>> (istream& in, vector<T>& v) {
-    for (auto& x : v) in >> x;
+istream &operator>>(istream &in, vector<bool> &v) {
+    bool n;
+    for (unsigned i = 0; i < v.size(); i++) {
+        in >> n;
+        v[i] = n;
+    }
     return in;
 }
 
 template<typename T>
-ostream& operator<< (ostream& os, vector<T>& v) {
-    for (auto& x : v) os << x << " ";
+istream &operator>>(istream &in, vector<T> &v);
+
+template<typename T>
+ostream &operator<<(ostream &os, vector<T> &v);
+
+template<typename T1, typename T2>
+istream &operator>>(istream &in, pair<T1, T2> &p);
+
+template<typename T1, typename T2>
+ostream &operator<<(ostream &os, pair<T1, T2> &p);
+
+template<typename T>
+istream &operator>>(istream &in, vector<T> &v) {
+    for (auto &x : v) in >> x;
+    return in;
+}
+
+template<typename T>
+ostream &operator<<(ostream &os, vector<T> &v) {
+    for (unsigned i = 0; i < v.size(); i++) os << v[i] << " ";
     return os;
 }
 
 template<typename T1, typename T2>
-istream& operator>> (istream& in, pair<T1, T2>& p) {
+istream &operator>>(istream &in, pair<T1, T2> &p) {
     in >> p.first >> p.second;
     return in;
 }
 
 template<typename T1, typename T2>
-ostream& operator<< (ostream& os, pair<T1, T2>& p) {
+ostream &operator<<(ostream &os, pair<T1, T2> &p) {
     os << p.first << " " << p.second;
     return os;
 }
 ```
- - Floating point output precision (6 decimal places by default)
+ - mt19937 random generator with random seed
 ```cpp
-std::cout << std::setprecision(6) << std::fixed;
+mt19937 rnd(chrono::duration_cast<chrono::nanoseconds>(chrono::system_clock::now().time_since_epoch()).count());
 ```
- - Speed up for standard I/O (optional, disabled by default)
+ - Speed up for standard I/O (optional, enabled by default and disabled in local)
 ```cpp
-//#define USE_QUICK_IO
-#ifdef USE_QUICK_IO
-     std::ios_base::sync_with_stdio(false);
-     std::cin.tie(nullptr);
-     std::cout.tie(nullptr);
+#define USE_QUICK_IO
+
+#ifndef LOCAL
+    #ifdef USE_QUICK_IO
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
+    #endif
 #endif
 ```
  - Redirecting filestream I/O to standard I/O (optional, disabled by defalut)
 ```cpp
 //#define USE_FILESTREAM
+
 #ifdef USE_FILESTREAM
-     std::freopen("input.txt", "r", stdin);
-     std::freopen("output.txt", "w", stdout);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
 #endif
 ```
- - Running solution for mutliple test cases (optional, disabled by default)
+ - Floating point output precision (9 decimal places by default)
+```cpp
+cout << setprecision(9) << fixed;
+```
+ - Running solution for multiple test cases (optional, disabled by default)
 ```cpp
 //#define USE_T
-long long t = 1;
+
+unsigned t = 1;
 #ifdef USE_T
-    std::cin >> t;
+    cin >> t;
 #endif
-for (long long i = 0; i < t; i++) solve(i + 1);
+for (unsigned i = 0; i < t; i++) solve(i + 1);
 ```
 
-The repository also includes a lite version of this template that includes only the most commonly used things.
+Repository also includes a lite version of this template that includes only the most commonly used things.
 
 # Files
 Repository includes the following files:

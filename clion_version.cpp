@@ -1,3 +1,5 @@
+#[[#pragma]]# GCC optimize("O3,unroll-loops")
+//#[[#define]]# _GLIBCXX_DEBUG
 #[[#include]]# <bits/stdc++.h>
 using namespace std;
 
@@ -13,10 +15,9 @@ using namespace std;
 #[[#define]]# repr(i, n) for (long long (i) = (long long)(n) - 1; (i) >= 0; (i)--)
 #[[#define]]# all(v) (v).begin(), (v).end()
 #[[#define]]# rall(v) (v).rbegin(), (v).rend()
-#[[#define]]# nl "\n"
+#[[#define]]# nl '\n'
 
 typedef long long ll;
-typedef string str;
 typedef pair<int, int> pi;
 typedef pair<long long, long long> pl;
 typedef vector<int> vi;
@@ -25,39 +26,46 @@ typedef vector<bool> vb;
 typedef vector<pair<int, int>> vpi;
 typedef vector<vector<int>> vvi;
 
-template<typename T> istream& operator>>(istream& in, vector<T>& v) { for (auto& x : v) in >> x; return in; }
-template<typename T> ostream& operator<<(ostream& os, vector<T>& v) { for (auto& x : v) os << x << " "; return os; }
+istream& operator>>(istream& in, vector<bool>& v) { bool n; for (auto&& i : v) { in >> n; i = n; } return in; }
+template<typename T> istream& operator>>(istream& in, vector<T>& v);
+template<typename T> ostream& operator<<(ostream& os, vector<T>& v);
+template<typename T1, typename T2> istream& operator>>(istream& in, pair<T1, T2>& p);
+template<typename T1, typename T2> ostream& operator<<(ostream& os, pair<T1, T2>& p);
+template<typename T> istream& operator>>(istream& in, vector<T>& v) { for (auto&& x : v) in >> x; return in; }
+template<typename T> ostream& operator<<(ostream& os, vector<T>& v) { for (auto&& x : v) os << x << " "; return os; }
 template<typename T1, typename T2> istream& operator>>(istream& in, pair<T1, T2>& p) { in >> p.first >> p.second; return in; }
 template<typename T1, typename T2> ostream& operator<<(ostream& os, pair<T1, T2>& p) { os << p.first << " " << p.second; return os; }
 
-mt19937 rnd(chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch()).count());
+mt19937 rnd(chrono::duration_cast<chrono::nanoseconds>(chrono::system_clock::now().time_since_epoch()).count());
 
 #[[#define]]# USE_QUICK_IO
 //#[[#define]]# USE_T
 //#[[#define]]# USE_FILESTREAM
 
-void solve(long long test_case) {
+
+void solve(unsigned test_case) {
     
     
     
 }
 
 
-int main() {
-    #[[#ifdef]]# USE_FILESTREAM
-        std::freopen("input.txt", "r", stdin);
-        std::freopen("output.txt", "w", stdout);
-    #[[#endif]]#
+int32_t main() {
     #[[#ifndef]]# MOLNEY_LOCAL
         #[[#ifdef]]# USE_QUICK_IO
-            std::ios_base::sync_with_stdio(false);
-            std::cin.tie(nullptr);
+            ios_base::sync_with_stdio(false);
+            cin.tie(nullptr);
         #[[#endif]]#
     #[[#endif]]#
-    std::cout << std::setprecision(6) << std::fixed;
-    long long t = 1;
-    #[[#ifdef]]# USE_T
-        std::cin >> t;
+    #[[#ifdef]]# USE_FILESTREAM
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
     #[[#endif]]#
-    for (long long i = 0; i < t; i++) solve(i + 1);
+
+    cout << setprecision(9) << fixed;
+    unsigned t = 1;
+    #[[#ifdef]]# USE_T
+        cin >> t;
+    #[[#endif]]#
+    for (unsigned i = 0; i < t; i++) solve(i + 1);
 }
