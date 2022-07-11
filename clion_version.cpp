@@ -69,11 +69,11 @@ int32_t main() {
         cin >> t;
     #[[#endif]]#
     for (unsigned i = 1; i <= t; i++) {
-        #[[#ifdef]]# MULTIPLE_TESTCASES
+        #[[#if]]# defined(MULTIPLE_TESTCASES) and defined(MOLNEY_LOCAL)
             cout << "Testcase " << i << ":\n";
         #[[#endif]]#
         solve(i);
-        #[[#ifdef]]# MULTIPLE_TESTCASES
+        #[[#if]]# defined(MULTIPLE_TESTCASES) and defined(MOLNEY_LOCAL)
             cout << " ----- \n";
         #[[#endif]]#
     }
