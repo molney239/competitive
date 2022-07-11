@@ -89,43 +89,55 @@ ostream &operator<<(ostream &os, pair<T1, T2> &p) {
     return os;
 }
 ```
- - mt19937 random generator with random seed
+ - mt19937_64 random generator with random seed
 ```cpp
-mt19937 rnd(chrono::duration_cast<chrono::nanoseconds>(chrono::system_clock::now().time_since_epoch()).count());
+mt19937_64 rnd(chrono::duration_cast<chrono::nanoseconds>(chrono::system_clock::now().time_since_epoch()).count());
 ```
- - Speed up for standard I/O (optional, enabled by default and disabled in local)
+ - Speed up for standard I/O *(optional, enabled by default and disabled on local machine)*
 ```cpp
-#define USE_QUICK_IO
+#define QUICK_IO
 
-#ifndef LOCAL
-    #ifdef USE_QUICK_IO
-        ios_base::sync_with_stdio(false);
-        cin.tie(nullptr);
-    #endif
+#ifdef QUICK_IO
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
 #endif
 ```
- - Redirecting filestream I/O to standard I/O (optional, disabled by defalut)
+ - Redirecting filestream I/O to standard I/O *(optional, disabled by defalut and disabled on local machine)*
 ```cpp
-//#define USE_FILESTREAM
+//#define FILESTREAM
 
-#ifdef USE_FILESTREAM
+#ifdef FILESTREAM
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
 ```
- - Floating point output precision (9 decimal places by default)
+ - Floating point output precision *(9 decimal places by default)*
 ```cpp
 cout << setprecision(9) << fixed;
 ```
- - Running solution for multiple test cases (optional, disabled by default)
+ - Running solution for multiple test cases *(optional, disabled by default)*
 ```cpp
-//#define USE_T
+//#define MULTIPLE_TESTCASES
 
 unsigned t = 1;
-#ifdef USE_T
+#ifdef MULTIPLE_TESTCASES
     cin >> t;
 #endif
-for (unsigned i = 0; i < t; i++) solve(i + 1);
+for (unsigned i = 1; i <= t; i++) {
+    #ifdef MULTIPLE_TESTCASES
+        cout << "Testcase " << i << ":\n";
+    #endif
+    solve(i);
+    #ifdef MULTIPLE_TESTCASES
+        cout << " ----- \n";
+    #endif
+}
+```
+ - Printing execution time of program in `stderr`
+```cpp
+clock_t start_time = clock();
+// ...
+cerr << "execution time = " << clock() - start_time << " ms\n";
 ```
 
 Repository also includes a lite version of this template that includes only the most commonly used things.

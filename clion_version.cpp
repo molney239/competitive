@@ -36,12 +36,11 @@ template<typename T> ostream& operator<<(ostream& os, vector<T>& v) { for (auto&
 template<typename T1, typename T2> istream& operator>>(istream& in, pair<T1, T2>& p) { in >> p.first >> p.second; return in; }
 template<typename T1, typename T2> ostream& operator<<(ostream& os, pair<T1, T2>& p) { os << p.first << " " << p.second; return os; }
 
-mt19937 rnd(chrono::duration_cast<chrono::nanoseconds>(chrono::system_clock::now().time_since_epoch()).count());
+mt19937_64 rnd(chrono::duration_cast<chrono::nanoseconds>(chrono::system_clock::now().time_since_epoch()).count());
 
-#[[#define]]# USE_QUICK_IO
-//#[[#define]]# USE_T
-//#[[#define]]# USE_FILESTREAM
-
+#[[#define]]# QUICK_IO
+//#[[#define]]# MULTIPLE_TESTCASES
+//#[[#define]]# FILESTREAM
 
 void solve(unsigned test_case) {
     
@@ -52,20 +51,31 @@ void solve(unsigned test_case) {
 
 int32_t main() {
     #[[#ifndef]]# MOLNEY_LOCAL
-        #[[#ifdef]]# USE_QUICK_IO
+        #[[#ifdef]]# QUICK_IO
             ios_base::sync_with_stdio(false);
             cin.tie(nullptr);
         #[[#endif]]#
-    #[[#endif]]#
-    #[[#ifdef]]# USE_FILESTREAM
-        freopen("input.txt", "r", stdin);
-        freopen("output.txt", "w", stdout);
+        #[[#ifdef]]# FILESTREAM
+            freopen("input.txt", "r", stdin);
+            freopen("output.txt", "w", stdout);
+        #[[#endif]]#
     #[[#endif]]#
 
     cout << setprecision(9) << fixed;
+
+    clock_t start_time = clock();
     unsigned t = 1;
-    #[[#ifdef]]# USE_T
+    #[[#ifdef]]# MULTIPLE_TESTCASES
         cin >> t;
     #[[#endif]]#
-    for (unsigned i = 0; i < t; i++) solve(i + 1);
+    for (unsigned i = 1; i <= t; i++) {
+        #[[#ifdef]]# MULTIPLE_TESTCASES
+            cout << "Testcase " << i << ":\n";
+        #[[#endif]]#
+        solve(i);
+        #[[#ifdef]]# MULTIPLE_TESTCASES
+            cout << " ----- \n";
+        #[[#endif]]#
+    }
+    cerr << "execution time = " << clock() - start_time << " ms\n";
 }
