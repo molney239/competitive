@@ -1,4 +1,4 @@
-#[[#pragma]]# GCC optimize("O3,unroll-loops")
+#[[#pragma]]# GCC optimize("O3,unroll-loops,inline-small-functions,inline-functions-called-once")
 //#[[#define]]# _GLIBCXX_DEBUG
 #[[#include]]# <bits/stdc++.h>
 using namespace std;
@@ -9,10 +9,12 @@ using namespace std;
 //using namespace __gnu_pbds;
 //using namespace __gnu_cxx;
 //typedef tree<int, null_type, less<>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
+const int RANDOM = chrono::duration_cast<chrono::nanoseconds>(chrono::system_clock::now().time_since_epoch()).count();
+struct chash { int operator()(int x) const { return x ^ RANDOM; } };
 
-#[[#define]]# rep(i, n) for (long long (i) = 0; (i) < (long long)(n); (i)++)
-#[[#define]]# rep1(i, n) for (long long (i) = 1; (i) < (long long)(n); (i)++)
-#[[#define]]# repr(i, n) for (long long (i) = (long long)(n) - 1; (i) >= 0; (i)--)
+#[[#define]]# rep(i, n) for (long long (i) = 0; (i) < (long long)(n); ++(i))
+#[[#define]]# rep1(i, n) for (long long (i) = 1; (i) < (long long)(n); ++(i))
+#[[#define]]# repr(i, n) for (long long (i) = (long long)(n) - 1; (i) >= 0; --(i))
 #[[#define]]# all(v) (v).begin(), (v).end()
 #[[#define]]# rall(v) (v).rbegin(), (v).rend()
 #[[#define]]# nl '\n'
@@ -27,10 +29,6 @@ typedef vector<pair<int, int>> vpi;
 typedef vector<vector<int>> vvi;
 
 istream& operator>>(istream& in, vector<bool>& v) { bool n; for (auto&& i : v) { in >> n; i = n; } return in; }
-template<typename T> istream& operator>>(istream& in, vector<T>& v);
-template<typename T> ostream& operator<<(ostream& os, vector<T>& v);
-template<typename T1, typename T2> istream& operator>>(istream& in, pair<T1, T2>& p);
-template<typename T1, typename T2> ostream& operator<<(ostream& os, pair<T1, T2>& p);
 template<typename T> istream& operator>>(istream& in, vector<T>& v) { for (auto&& x : v) in >> x; return in; }
 template<typename T> ostream& operator<<(ostream& os, vector<T>& v) { for (auto&& x : v) os << x << " "; return os; }
 template<typename T1, typename T2> istream& operator>>(istream& in, pair<T1, T2>& p) { in >> p.first >> p.second; return in; }
@@ -41,6 +39,7 @@ mt19937_64 rnd(chrono::duration_cast<chrono::nanoseconds>(chrono::system_clock::
 #[[#define]]# QUICK_IO
 //#[[#define]]# MULTIPLE_TESTCASES
 //#[[#define]]# FILESTREAM
+
 
 void solve(unsigned test_case) {
     
@@ -68,14 +67,6 @@ int32_t main() {
     #[[#ifdef]]# MULTIPLE_TESTCASES
         cin >> t;
     #[[#endif]]#
-    for (unsigned i = 1; i <= t; i++) {
-        #[[#if]]# defined(MULTIPLE_TESTCASES) and defined(MOLNEY_LOCAL)
-            cout << "Testcase " << i << ":\n";
-        #[[#endif]]#
-        solve(i);
-        #[[#if]]# defined(MULTIPLE_TESTCASES) and defined(MOLNEY_LOCAL)
-            cout << " ----- \n";
-        #[[#endif]]#
-    }
+    for (unsigned i = 1; i <= t; ++i) solve(i);
     cerr << "execution time = " << clock() - start_time << " ms\n";
 }
