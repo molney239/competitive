@@ -24,10 +24,10 @@ typedef tree<int, null_type, less<>, rb_tree_tag, tree_order_statistics_node_upd
 ```
  - Custom random hash function
  ```cpp
-const int RANDOM = chrono::duration_cast<chrono::nanoseconds>(chrono::system_clock::now().time_since_epoch()).count();
-struct chash { 
+const int RANDOM_HASH = (int) chrono::steady_clock::now().time_since_epoch().count();
+struct custom_hash {
     int operator()(int x) const {
-        return x ^ RANDOM;
+        return x ^ RANDOM_HASH;
     }
 };
  ```
@@ -44,7 +44,6 @@ struct chash {
 ```cpp
 typedef long long ll;
 typedef pair<int, int> pi;
-typedef pair<long long, long long> pl;
 typedef vector<int> vi;
 typedef vector<long long> vl;
 typedef vector<bool> vb;
@@ -53,7 +52,7 @@ typedef vector<vector<int>> vvi;
 ```
  - I/O overload for vectors and pairs
 ```cpp
-istream &operator>>(istream &in, vector<bool> &v) {
+istream &operator>>(istream &in, const vector<bool> &v) {
     bool n;
     for (auto &&i : v) {
         in >> n;
@@ -63,32 +62,52 @@ istream &operator>>(istream &in, vector<bool> &v) {
 }
 
 template<typename T>
-istream &operator>>(istream &in, vector<T> &v) {
+istream &operator>>(istream &in, const vector<T> &v) {
     for (auto &&x : v) in >> x;
     return in;
 }
 
 template<typename T>
-ostream &operator<<(ostream &os, vector<T> &v) {
+ostream &operator<<(ostream &os, const vector<T> &v) {
     for (auto &&x : v) os << x << " ";
     return os;
 }
 
 template<typename T1, typename T2>
-istream &operator>>(istream &in, pair<T1, T2> &p) {
+istream &operator>>(istream &in, const pair<T1, T2> &p) {
     in >> p.first >> p.second;
     return in;
 }
 
 template<typename T1, typename T2>
-ostream &operator<<(ostream &os, pair<T1, T2> &p) {
+ostream &operator<<(ostream &os, const pair<T1, T2> &p) {
     os << p.first << " " << p.second;
     return os;
 }
 ```
+ - min= and max= operators
+```cpp
+template<typename T1, typename T2>
+bool chmin(T1 &a, const T2 &b) {
+    if (a > b) {
+        a = b;
+        return true;
+    }
+    return false;
+}
+
+template<typename T1, typename T2>
+bool chmax(T1 &a, const T2 &b) {
+    if (a < b) {
+        a = b;
+        return true;
+    }
+    return false;
+}
+```
  - mt19937_64 random generator with random seed
 ```cpp
-mt19937_64 rnd(chrono::duration_cast<chrono::nanoseconds>(chrono::system_clock::now().time_since_epoch()).count());
+mt19937_64 rnd((unsigned int) chrono::steady_clock::now().time_since_epoch().count());
 ```
  - Speed up for standard I/O *(optional, enabled by default and disabled on local machine)*
 ```cpp
