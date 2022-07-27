@@ -28,10 +28,10 @@ typedef vector<bool> vb;
 typedef vector<pair<int, int>> vpi;
 typedef vector<vector<int>> vvi;
 
-istream& operator>>(istream& in, const vector<bool>& v) { bool n; for (auto&& i : v) { in >> n; i = n; } return in; }
-template<typename T> istream& operator>>(istream& in, const vector<T>& v) { for (auto&& x : v) in >> x; return in; }
+istream& operator>>(istream& in, vector<bool>& v) { bool n; for (auto&& i : v) { in >> n; i = n; } return in; }
+template<typename T> istream& operator>>(istream& in, vector<T>& v) { for (auto&& x : v) in >> x; return in; }
 template<typename T> ostream& operator<<(ostream& os, const vector<T>& v) { for (auto&& x : v) os << x << " "; return os; }
-template<typename T1, typename T2> istream& operator>>(istream& in, const pair<T1, T2>& p) { in >> p.first >> p.second; return in; }
+template<typename T1, typename T2> istream& operator>>(istream& in, pair<T1, T2>& p) { in >> p.first >> p.second; return in; }
 template<typename T1, typename T2> ostream& operator<<(ostream& os, const pair<T1, T2>& p) { os << p.first << " " << p.second; return os; }
 
 template<typename T1, typename T2> bool chmin(T1& a, const T2& b) { if (a > b) { a = b; return true; } return false; }
