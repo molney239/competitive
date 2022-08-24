@@ -1,3 +1,6 @@
+
+# Libraries
+
 import os
 import subprocess
 
@@ -8,58 +11,125 @@ import config
 
 colorama.init()
 
-# Compilation
+try:
 
-cprint("Compiling solution...", "blue")
-os.system(f"{config.COMPILER_PATH} {config.PROJECT_DIRECTORY_PATH + config.SOLUTION_PATH} -o solve.exe "
-          f"{config.SOLUTION_COMPILER_FLAGS}")
-cprint("Solution compilation finished", "green")
+    # Compilation
 
-if config.USE_CHECKER_INSTEAD_OF_STUPID:
-    cprint("Compiling checker...", "blue")
-    os.system(f"{config.COMPILER_PATH} {config.PROJECT_DIRECTORY_PATH + config.CHECKER_PATH} -o check.exe")
-    cprint("Checker compilation finished", "green")
-else:
-    cprint("Compiling stupid...", "blue")
-    os.system(f"{config.COMPILER_PATH} {config.PROJECT_DIRECTORY_PATH + config.STUPID_PATH} -o stupid.exe")
-    cprint("Stupid compilation finished", "green")
-
-cprint("Compiling generator...", "blue")
-os.system(f"{config.COMPILER_PATH} {config.PROJECT_DIRECTORY_PATH + config.GEN_PATH} -o gen.exe")
-cprint("Generator compilation finished", "green")
-
-print()
-
-# Testing
-
-counter = 1
-while True:
-
-    input_data = subprocess.run("gen.exe", capture_output=True).stdout
-    output_data = subprocess.run("solve.exe", input=input_data, capture_output=True).stdout
+    cprint("Compiling solution...", "blue")
+    try:
+        subprocess.run(config.SOLUTION_COMPILER).check_returncode()
+    except (KeyboardInterrupt, SystemExit):
+        raise
+    except: 
+        cprint("Solution compilation failed", "red")
+        exit(1)
+    cprint("Solution compilation finished", "green")
 
     if config.USE_CHECKER_INSTEAD_OF_STUPID:
-        res = subprocess.run("check.exe", input=input_data + b'\n' + output_data, capture_output=True).stdout.decode(
-            "utf-8")
+        cprint("Compiling checker...", "blue")
+        try:
+            subprocess.run(config.CHECKER_COMPILER).check_returncode()
+        except (KeyboardInterrupt, SystemExit):
+            raise
+        except:
+            cprint("Checker compilation falied", "red")
+            exit(1)
+        cprint("Checker compilation finished", "green")
+    else:
+        cprint("Compiling stupid...", "blue")
+        try:
+            subprocess.run(config.STUPID_COMPILER).check_returncode()
+        except (KeyboardInterrupt, SystemExit):
+            raise
+        except:
+            cprint("Stupid compilation failed")
+            exit(1)
+        cprint("Stupid compilation finished", "green")
 
-        if res[0] == '0':
-            cprint(f"Test {counter} failed:", "red")
+    cprint("Compiling generator...", "blue")
+    try:
+        subprocess.run(config.GEN_COMPILER)
+    except (KeyboardInterrupt, SystemExit):
+        raise
+    except:
+        cprint("Generator compilation failed", "red")
+        exit(1)
+    cprint("Generator compilation finished", "green")
 
+    print()
+
+    # Testing
+
+    counter = 1
+    while True:
+
+        print(f"Test {counter}: ", end="")
+        try:
+            input_data = subprocess.run(config.GEN_RUN, capture_output=True, check=True).stdout
+        except (KeyboardInterrupt, SystemExit):
+            raise
+        except:
+            cprint("Generator runtime error", "red")
+            exit(1)
+
+        try:
+            output_data = subprocess.run(config.SOLUTION_RUN, input=input_data, 
+                                        capture_output=True, check=True).stdout
+        except (KeyboardInterrupt, SystemExit):
+            raise
+        except Exception as e:
+            cprint(f"Runtime error", "red")
             cprint("Input:", "blue")
             cprint(input_data.decode("utf-8"), "yellow")
+            exit(1)
 
-            cprint("Solution output:", "blue")
-            cprint(output_data.decode("utf-8"), "yellow")
+        if config.USE_CHECKER_INSTEAD_OF_STUPID:
+            try:
+                res = subprocess.run(config.CHECKER_RUN, 
+                                    input=input_data + b'\n' + output_data, 
+                                    capture_output=True, check=True).stdout.decode("utf-8")
+            except (KeyboardInterrupt, SystemExit):
+                raise
+            except:
+                cprint("Checker runtime error", "red")
+                exit(1)
 
-            cprint("Checker verdict:", "blue")
-            cprint(res[1:], "yellow")
-            break
-    else:
-        res = subprocess.run("stupid.exe", input=input_data, capture_output=True).stdout
+            if res[0] == '0':
+                cprint(f"Wrong answer", "red")
 
-        if output_data != res:
-            cprint(f"Test {counter} failed:", "red")
+                cprint("Input:", "blue")
+                cprint(input_data.decode("utf-8"), "yellow")
 
+                cprint("Solution output:", "blue")
+                cprint(output_data.decode("utf-8"), "yellow")
+
+                cprint("Checker verdict:", "blue")
+                cprint(res[1:], "yellow")
+                break
+        else:
+            try:
+                res = subprocess.run(config.STUPID_RUN, input=input_data, capture_output=True, check=True).stdout
+            except (KeyboardInterrupt, SystemExit):
+                raise
+            except:
+                cprint("Stupid runtime error", "red")
+                exit(1)
+
+            if output_data != res:
+                cprint(f"Wrong answer", "red")
+
+                cprint("Input:", "blue")
+                cprint(input_data.decode("utf-8"), "yellow")
+
+                cprint("Solution output:", "blue")
+                cprint(output_data.decode("utf-8"), "yellow")
+
+                cprint("Stupid output:", "blue")
+                cprint(res.decode("utf-8"), "yellow")
+                break
+
+        cprint(f"Accepted", "green")
+        if config.PRINT_PASSED_TESTS:
             cprint("Input:", "blue")
             cprint(input_data.decode("utf-8"), "yellow")
 
@@ -68,13 +138,8 @@ while True:
 
             cprint("Stupid output:", "blue")
             cprint(res.decode("utf-8"), "yellow")
-            break
+            cprint()
 
-    if config.PRINT_PASSED_TESTS:
-        cprint(f"Test {counter} passed:", "green")
-        cprint(input_data.decode("utf-8"), "yellow")
-        print()
-    else:
-        cprint(f"Test {counter} passed", "green")
-
-    counter += 1
+        counter += 1
+except KeyboardInterrupt:
+    cprint("Stopped", "blue")
