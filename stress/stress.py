@@ -138,7 +138,6 @@ try:
 
             cprint("Stupid output:", "blue")
             cprint(res.decode("utf-8"), "yellow")
-            cprint()
 
         counter += 1
 except KeyboardInterrupt:
