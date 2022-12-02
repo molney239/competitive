@@ -24,39 +24,15 @@ using namespace std;
 
 - I/O overload for vectors and pairs, colored output (for running in terminal) and removing cerr on testing system
 ```cpp
+template<typename T> istream& operator>>(istream& in, vector<T>& v);
+template<typename T> ostream& operator<<(ostream& out, const vector<T>& v);
+template<typename T1, typename T2> istream& operator>>(istream& in, pair<T1, T2>& p);
+template<typename T1, typename T2> ostream& operator<<(ostream& out, const pair<T1, T2>& p);
 istream& operator>>(istream& in, vector<bool>& v) { bool n; for (auto&& i : v) { in >> n; i = n; } return in; }
-template<typename T> istream& operator>>(istream& in, vector<T>& v) { for (auto&& x : v) in >> x; return in; }
-template<typename T> ostream& operator<<(ostream& os, const vector<T>& v) { for (auto&& x : v) os << x << " "; return os; }
+template<typename T> istream& operator>>(istream& in, vector<T>& v) { for (auto& x : v) in >> x; return in; }
+template<typename T> ostream& operator<<(ostream& out, const vector<T>& v) { for (auto& x : v) out << x << " "; return out; }
 template<typename T1, typename T2> istream& operator>>(istream& in, pair<T1, T2>& p) { in >> p.first >> p.second; return in; }
-template<typename T1, typename T2> ostream& operator<<(ostream& os, const pair<T1, T2>& p) { os << p.first << " " << p.second; return os; }
-#ifdef LOCAL
-    #include "debug.h"
-#else
-    struct my_cerr {}; template<typename T> my_cerr& operator<<(my_cerr& out, const T& value) { return out; }
-    my_cerr mcerr;
-    #define cerr mcerr
-#endif
-```
-
-- min= and max= operators
-```cpp
-template<typename T1, typename T2>
-bool chmin(T1 &a, const T2 &b) {
-    if (a > b) {
-        a = b;
-        return true;
-    }
-    return false;
-}
-
-template<typename T1, typename T2>
-bool chmax(T1 &a, const T2 &b) {
-    if (a < b) {
-        a = b;
-        return true;
-    }
-    return false;
-}
+template<typename T1, typename T2> ostream& operator<<(ostream& out, const pair<T1, T2>& p) { out << p.first << " " << p.second; return out; }
 ```
 
 - mt19937_64 random generator with random seed
@@ -109,10 +85,6 @@ unsigned t = 1;
 #endif
 for (unsigned i = 1; i <= t; ++i) solve(i);
 ```
-
-Directory includes the following files:
-- **template.cpp** - Main competitive template file
-- **debug.h** - File that will be used in program if it's running on local machine (is used for colored output in terminal)
 
 ## ```stress```
 

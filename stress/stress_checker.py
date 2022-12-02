@@ -3,7 +3,7 @@
 import os
 from termcolor import cprint
 
-from config import *
+from config_checker import *
 
 
 def neutral(text="", end="\n"):
@@ -42,8 +42,6 @@ def print_file(path):
     neutral()
     f.close()
 
-if IGNORE_WRONG_ANSWER:
-    warning("Stress ignores verdict \"Wrong answer\"")
 
 # Compiling
 
@@ -59,11 +57,11 @@ if try_run(SOLUTION_COMPILE) != 0:
     exit(3)
 success("Solution compilation finished")
 
-info("Compiling correct solution...")
-if try_run(CORRECT_SOLUTION_COMPILE) != 0:
-    error("Correct solution compilation failed")
+info("Compiling checker...")
+if try_run(CHECKER_COMPILE) != 0:
+    error("Checker compilation failed")
     exit(3)
-success("Correct solution compilation finished")
+success("Checker compilation finished")
 
 # Testing
 
@@ -82,16 +80,18 @@ while True:
         print_file(f"{WORKING_DIRECTORY}input.txt")
         exit(0)
 
-    if try_run(CORRECT_SOLUTION_RUN + f" < \"{WORKING_DIRECTORY}input.txt\"" +
-               f" > \"{WORKING_DIRECTORY}answer.txt\"") != 0:
-        error("Correct solution runtime error")
+    if try_run(CHECKER_RUN + f" < \"{WORKING_DIRECTORY}input.txt\"" +
+                             f" < \"{WORKING_DIRECTORY}output.txt\""
+                             f" > \"{WORKING_DIRECTORY}verdict.txt\"") != 0:
+        error("Checker runtime error")
         info("Input:")
         print_file(f"{WORKING_DIRECTORY}input.txt")
         exit(3)
 
-    if (not IGNORE_WRONG_ANSWER) and (
-            try_run(f"cmp {WORKING_DIRECTORY}output.txt {WORKING_DIRECTORY}answer.txt --silent") != 0):
-        error("Wrong answer")
+    verdict = open(f"{WORKING_DIRECTORY}verdict.txt", "r").read(2)
+
+    if verdict in BAD_VERDICTS:
+        error(verdict)
 
         info("Input:")
         print_file(f"{WORKING_DIRECTORY}input.txt")
@@ -99,11 +99,11 @@ while True:
         info("Solution output:")
         print_file(f"{WORKING_DIRECTORY}output.txt")
 
-        info("Answer:")
-        print_file(f"{WORKING_DIRECTORY}answer.txt")
+        info("Checker output:")
+        print_file(f"{WORKING_DIRECTORY}verdict.txt")
         exit(0)
 
-    success("OK")
+    success(verdict)
 
     if PRINT_PASSED_TESTS:
         info("Input:")
